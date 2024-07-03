@@ -43,7 +43,7 @@ task compileBuildroot(type: Exec) {
         enabled = false
     }
     outputs.files "output/images/fw_jump.bin", "output/images/Image", "output/images/rootfs.ext2"
-    outputs.upToDateWhen { false }
+    outputs.upToDateWhen { true }
 }
 
 task generateLegalInfo(type: Exec) {
@@ -53,7 +53,7 @@ task generateLegalInfo(type: Exec) {
         enabled = false
     }
     outputs.dirs "output/legal-info/licenses"
-    outputs.upToDateWhen { false }
+    outputs.upToDateWhen { true }
 }
 
 task copyBuildrootImages(type: Copy) {
@@ -70,6 +70,8 @@ copyBuildrootImages.dependsOn(compileBuildroot)
 copyBuildrootImages.dependsOn(generateLegalInfo)
 compileJava.dependsOn(copyBuildrootImages)
 compileJava.dependsOn(copyBuildrootLicenses)
+processResources.dependsOn(copyBuildrootImages)
+processResources.dependsOn(copyBuildrootLicenses)
 
 publishing {
     publications {
