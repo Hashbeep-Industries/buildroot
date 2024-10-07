@@ -1,4 +1,4 @@
-package li.cil.sedna.buildroot;
+package me.hashbeep.sedna.buildroot;
 
 import java.io.InputStream;
 
